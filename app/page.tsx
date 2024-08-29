@@ -6,18 +6,8 @@ import CreateCard from "./CreateCard";
 import Randomizer from "./Randomizer";
 
 // ID for app: Randominion
-const APP_ID = "25fae525-9ceb-4531-8917-f76a93773e8e";
 
 // Optional: Declare your schema for intellisense!
-type Card = {
-  name: string;
-  image: Blob;
-};
-
-type Schema = {
-  cards: Record<string, Card>;
-};
-export const db = init<Schema>({ appId: APP_ID });
 
 
 function App() {

@@ -2,8 +2,7 @@
 
 import React, { useState } from "react";
 import { init, tx, id } from "@instantdb/react";
-import { db } from "./page";
-import { resizeFile } from "./utils";
+import { db, resizeFile } from "./utils";
 
 const CreateCard = () => {
   const [title, setTitle] = useState("");

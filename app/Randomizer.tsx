@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { init, tx, id } from "@instantdb/react";
-import { db } from "./page";
+import { db } from "./utils";
 
 function shuffle(array) {
     let currentIndex = array.length;
@@ -35,7 +35,7 @@ const Randomizer = () => {
   };
 
   useEffect(() => randomize(), [isLoading]);
-  
+
   return isLoading ? (
     <div>Randomizer is loading cards...</div>
   ) : (
