@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { init, tx, id } from "@instantdb/react";
-import { db, resizeFile } from "./utils";
+import { db, resizeFile } from "../../utils";
+import { ButtonBasic } from "../../Components/ButtonBasic/ButtonBasic.styled";
 
 const CreateCard = () => {
   const [title, setTitle] = useState("");
@@ -37,17 +38,7 @@ const CreateCard = () => {
     setTitle("");
   };
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "30%",
-        minWidth: "300px",
-        gap: "10px",
-      }}
-    >
+    <>
       <p style={{ height: "10px", width: "50%" }}>name: {title}</p>
       {
         <div
@@ -66,39 +57,32 @@ const CreateCard = () => {
       }
       <input type="text" onChange={(e) => setTitle(e.target.value)} />
       <input type="file" onChange={handleChange} />
-      <div style={{ display: "flex", flexDirection: "row", gap: '10px' }}>
-        <div
+      <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
+        <ButtonBasic
           style={{
             width: "80px",
             height: "40px",
             border: "2px solid grey",
-            display: "flex",
-            justifyItems: "center",
-            justifyContent: "center",
             borderRadius: "20px",
-            cursor: "pointer",
-          }}
-          onClick={pushToDb}
-        >
-          <span>confirm</span>
-        </div>
-        <div
-          style={{
-            width: "80px",
-            height: "40px",
-            border: "2px solid grey",
-            display: "flex",
-            justifyItems: "center",
-            justifyContent: "center",
-            borderRadius: "20px",
-            cursor: "pointer",
           }}
           onClick={handleClear}
         >
           <span>clear</span>
-        </div>
+        </ButtonBasic>
+        <ButtonBasic
+          style={{
+            width: "80px",
+            height: "40px",
+            border: "2px solid grey",
+            borderRadius: "20px",
+            background: "#60ff60",
+          }}
+          onClick={pushToDb}
+        >
+          <span>confirm</span>
+        </ButtonBasic>
       </div>
-    </div>
+    </>
   );
 };
 

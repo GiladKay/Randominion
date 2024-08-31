@@ -6,11 +6,16 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@fontsource/roboto": "^5.0.14",
     "@instantdb/react": "^0.12.13",
+    "@mui/material": "^6.0.1",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-image-file-resizer": "^0.4.8"
+    "react-image-file-resizer": "^0.4.8",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
     "@types/node": "20.10.8",

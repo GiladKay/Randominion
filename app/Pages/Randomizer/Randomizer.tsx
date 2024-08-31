@@ -2,19 +2,17 @@
 
 import React, { useEffect, useState } from "react";
 import { init, tx, id } from "@instantdb/react";
-import { db } from "./utils";
+import { db } from "../../utils";
+import { ButtonBasic } from "../../Components/ButtonBasic/ButtonBasic.styled";
+import { Stack } from "@mui/material";
 
 function shuffle(array) {
     let currentIndex = array.length;
   
-    // While there remain elements to shuffle...
     while (currentIndex != 0) {
-  
-      // Pick a remaining element...
       let randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
   
-      // And swap it with the current element.
       [array[currentIndex], array[randomIndex]] = [
         array[randomIndex], array[currentIndex]];
     }
@@ -39,23 +37,19 @@ const Randomizer = () => {
   return isLoading ? (
     <div>Randomizer is loading cards...</div>
   ) : (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <div
+    <>
+      <ButtonBasic
         style={{
           width: "80px",
           height: "40px",
           border: "2px solid grey",
-          display: "flex",
-          justifyItems: "center",
-          justifyContent: "center",
           borderRadius: "20px",
-          cursor: "pointer",
-          background: "yellow",
+          background: "linear-gradient(45deg, #d3ff67, #70b9ff)",
         }}
         onClick={randomize}
       >
         <span>randomize</span>
-      </div>
+      </ButtonBasic>
       <div
         style={{
           display: "flex",
@@ -83,7 +77,7 @@ const Randomizer = () => {
           );
         })}
       </div>
-    </div>
+    </>
   );
 };
 
