@@ -26,7 +26,7 @@ const CreateCard = () => {
   const [image, setImage] = useState<{ src: string; raw: Blob | string }>();
   const [urlType, setUrlType] = useState(URLType.Data);
   const { isLoading, error, data } = db.useQuery({ categories: {} });
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState<string>();
   const [customCategory, setCustomCategory] = useState("");
 
   async function handleChange(e) {
