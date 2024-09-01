@@ -31,6 +31,11 @@ const Randomizer = () => {
   const [filters, setFilters] = useState<string[]>([]);
   const [chosenCards, setChosenCards] = useState([]);
 
+  const deleteCard = (cardId: string) => {
+    db.transact([tx.cards[cardId].delete()]);
+    setChosenCards(prev => prev.filter(card => card.id !== cardId));
+  }
+
   const randomize = () => {
     if (!cards) return;
 
@@ -111,6 +116,11 @@ const Randomizer = () => {
                 width: "210px",
                 height: "370px",
                 overflow: "hidden",
+              }}
+              onDoubleClick={() => {
+                if (confirm("are you sure you want to delete this card?")) {
+                  deleteCard(card.id)
+                }
               }}
             >
               <div style={{ position: "absolute", top: 0, fontWeight: 600 }}>
