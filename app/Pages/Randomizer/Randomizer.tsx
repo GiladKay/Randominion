@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { init, tx, id } from "@instantdb/react";
 import { db } from "../../utils";
 import { ButtonBasic } from "../../Components/ButtonBasic/ButtonBasic.styled";
-import { Stack } from "@mui/material";
+import { Autocomplete, Stack, TextField } from "@mui/material";
 
 function shuffle(array) {
   let currentIndex = array.length;
@@ -22,14 +22,25 @@ function shuffle(array) {
 }
 
 const Randomizer = () => {
-  const { isLoading, error, data } = db.useQuery({ cards: { category: {} } });
+  const { isLoading, error, data } = db.useQuery({
+    cards: { category: {} },
+    categories: {},
+  });
   const { cards } = data || {};
 
+  const [filters, setFilters] = useState<string[]>([]);
   const [chosenCards, setChosenCards] = useState([]);
 
   const randomize = () => {
     if (!cards) return;
-    const shuffledCards = shuffle(Object.values(cards));
+
+    const filteredCards = filters.length
+      ? Object.values(cards).filter((card) =>
+          filters.includes(card.category[0].id)
+        )
+      : Object.values(cards);
+
+    const shuffledCards = shuffle(filteredCards);
 
     setChosenCards(shuffledCards.slice(0, 10));
   };
@@ -61,10 +72,30 @@ const Randomizer = () => {
             borderRadius: "20px",
             background: "#70b9ff",
           }}
-          onClick={() => setChosenCards(cards)}
+          onClick={() => {
+            setChosenCards(cards);
+          }}
         >
           <span>show all</span>
         </ButtonBasic>
+        <Autocomplete
+          multiple
+          id="tags-standard"
+          options={data.categories}
+          getOptionLabel={(option) => option.name}
+          defaultValue={[]}
+          onChange={(_, values) => {
+            setFilters(values.map(({ id }) => id));
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              variant="standard"
+              label="Multiple values"
+              placeholder="Favorites"
+            />
+          )}
+        />
       </Stack>
       <Stack flexWrap="wrap" direction="row">
         {chosenCards.map((card) => {
